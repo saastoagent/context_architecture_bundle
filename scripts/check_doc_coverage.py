@@ -52,10 +52,10 @@ def run_git(args: list[str]) -> str:
     return completed.stdout
 
 
-def changed_files() -> list[str]:
-    git_root = Path(run_git(["rev-parse", "--show-toplevel"]).strip()).resolve()
+def parse_status_paths(status_output: str, git_root: Path, project_root: Path) -> list[str]:
+    """Return project-relative changed file paths from git status porcelain."""
     paths: list[str] = []
-    for line in run_git(["status", "--porcelain"]).splitlines():
+    for line in status_output.splitlines():
         if not line.strip():
             continue
         path_text = line[3:]
@@ -63,14 +63,19 @@ def changed_files() -> list[str]:
             path_text = path_text.split(" -> ", 1)[1]
         absolute = (git_root / path_text.replace("\\", "/").strip('"')).resolve()
         try:
-            project_path = absolute.relative_to(PROJECT_ROOT).as_posix()
+            project_path = absolute.relative_to(project_root).as_posix()
         except ValueError:
             continue
-        if (PROJECT_ROOT / project_path).is_dir():
-            paths.extend(child.relative_to(PROJECT_ROOT).as_posix() for child in (PROJECT_ROOT / project_path).rglob("*") if child.is_file())
+        if (project_root / project_path).is_dir():
+            paths.extend(child.relative_to(project_root).as_posix() for child in (project_root / project_path).rglob("*") if child.is_file())
         else:
             paths.append(project_path)
     return sorted(set(paths))
+
+
+def changed_files() -> list[str]:
+    git_root = Path(run_git(["rev-parse", "--show-toplevel"]).strip()).resolve()
+    return parse_status_paths(run_git(["status", "--porcelain"]), git_root, PROJECT_ROOT)
 
 
 def match(path: str, pattern: str) -> bool:
