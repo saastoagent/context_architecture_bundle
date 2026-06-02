@@ -7,10 +7,12 @@ subsystems it covers.
 
 | Suite | Command | Protects | Source owner |
 | --- | --- | --- | --- |
-| `[FAST_SUITE]` | `[FAST_CHECK_COMMAND]` | `[BEHAVIOR]` | `[CODE_MAP_ROW]` |
-| `[FULL_SUITE]` | `[FULL_CHECK_COMMAND]` | `[BEHAVIOR]` | `[CODE_MAP_ROW]` |
+| Checker help | `python scripts/check_doc_coverage.py --help` | CLI entrypoint remains usable | Tests and validation harness |
+| Checker targeted mapping | `python scripts/check_doc_coverage.py --files README.md skills/create-context-architecture-bundle/SKILL.md` | Source-to-doc ownership mapping remains understandable | Context architecture lifecycle, Repo-local skills |
+| Unit tests | `python -m unittest discover` | Code-map parsing, renamed-file handling, glob matching, and unmatched-file warnings | Tests and validation harness |
+| Documentation self-review | Manual review of README, `docs/`, example, and GitHub templates | Public onboarding and adoption clarity | Context architecture lifecycle |
 
-## Each Test Doc Should Include
+## Future Test Docs Should Include
 
 - test approach
 - fixtures used

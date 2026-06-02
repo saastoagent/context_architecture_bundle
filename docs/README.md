@@ -6,10 +6,14 @@ Docs should answer how to use the system. Architecture ownership belongs in
 `architecture/`, validation meaning belongs in `test_index/`, and current state
 belongs in `context.md`.
 
-Suggested docs:
+Current docs:
 
 - `setup.md`
 - `usage.md`
+- `adoption.md`
+
+Suggested future docs:
+
 - `debugging.md`
-- `deployment.md`
-- `api-reference.md`
+- `release.md`
+- `examples.md`
