@@ -1,3 +1,5 @@
-# Replace this placeholder with the maintainer or organization sponsor target.
+github:
+  - saastoagent
+buy_me_a_coffee: saastoagent
 custom:
-  - https://github.com/sponsors/YOUR_GITHUB_USERNAME
+  - https://github.com/sponsors/saastoagent
