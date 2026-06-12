@@ -1,4 +1,4 @@
-# Security
+~# Security
 
 Context Architecture Bundle is a documentation template and advisory script.
 Please report security issues if you find behavior that could expose secrets,
